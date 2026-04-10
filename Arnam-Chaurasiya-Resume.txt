@@ -1,0 +1,61 @@
+Arnam Chaurasiya
+Amritsar, India
+Email: arnamchaurasiya@gmail.com
+LinkedIn: linkedin.com/in/arnamchaurasiya
+GitHub: github.com/arnamchaurasiya
+
+EDUCATION
+Thapar Institute of Engineering and Technology, Patiala, India
+B.E. in Computer Engineering
+Sep 2022 - Present
+
+EXPERIENCE
+Goyalinfocom, Bikaner, India
+Product Analyst Intern
+Jun 2025 - Aug 2025
+- Analyzed product usage data across web and mobile modules using Excel and SQL to identify customer pain points.
+- Translated business and client requirements into structured user stories and feature scopes.
+- Participated in sprint planning and cross-functional discussions, aligning delivery priorities with stakeholder expectations.
+- Prepared feature documentation to improve clarity across product, engineering, and operations teams.
+
+LEADERSHIP EXPERIENCE
+GENE Society, TIET Patiala, India
+Joint Secretary
+May 2024 - Mar 2025
+- Led planning and execution of a 100+ participant Ideathon, aligning stakeholders, sponsors, and student teams.
+- Secured sponsorships from TrueScholar and BragFit through structured outreach and value proposition pitching.
+- Managed annual budget planning, fund allocation, and execution tracking to ensure operational efficiency.
+
+Technical Head
+Sep 2023 - May 2024
+- Led a 15-member cross-functional team in the end-to-end development of the society website.
+- Collaborated with design and development teams to refine UI components and optimize navigation flows.
+
+PROJECTS
+HydroGuard - Smart India Hackathon 2024 Winning Project
+- Led product discovery, stakeholder interviews, and feature prioritization for a government-facing irrigation monitoring platform under the Ministry of Jal Shakti.
+- Defined MVP scope addressing siltation tracking, climate impact assessment, and legacy monitoring inefficiencies.
+- Presented iterative product updates to domain experts and incorporated feedback into backlog refinement.
+
+GENE Website
+- Defined end-to-end user journeys and structured information architecture to improve accessibility and content discoverability.
+- Implemented role-based access logic and modular content updates to ensure scalability and long-term maintainability.
+
+ICMP - Improvement Course Management Portal
+- Designed role-based workflows and access boundaries for Students, Coordinators, HODs, and DOAA within a structured academic governance framework.
+- Created scalable design systems and reusable UI components in Figma to support consistent cross-platform experience.
+
+SKILLS
+Product & Agile: User stories, Backlog prioritization, Sprint planning, Product lifecycle, OKRs & KPIs
+Data & Analysis: Excel (Pivot Tables, dashboards), SQL, Data interpretation, Trend analysis
+Tools: Git, GitHub, Figma, Excel, Word
+Concepts: Stakeholder management, Product adoption, DBMS, OOP
+AI Exposure: Generative AI applications, AI-assisted product workflows
+Technical Skills: HTML5, CSS3, Python, SQL, C++
+
+ACHIEVEMENTS
+- Smart India Hackathon Winner (2024): Team won INR 100,000 under the Ministry of Jal Shakti PS: 1691.
+- Identified and reported a critical bug in the Blackbox AI software.
+- 1st Place - MYSTIQODE CTF (OWASP TIET): Won INR 6000, Cyber Security, Problem Solving.
+- 2nd Place - RECKON CTF (ISTE): Won INR 5000, Cipher Decoding.
+- Earned the Database Security for Cyber Professionals certification.
