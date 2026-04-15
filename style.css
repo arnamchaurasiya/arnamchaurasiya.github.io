@@ -258,6 +258,7 @@ main {
 .hero-grid {
   grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.95fr);
   align-items: start;
+  margin-top: 1.8rem;
 }
 
 .hero-card,
@@ -376,17 +377,24 @@ p {
 .hero-profile {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1.8rem;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
   margin-top: 1.2rem;
   margin-bottom: 0.5rem;
+  min-width: 0;
+}
+
+.hero-profile h1 {
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  min-width: 0;
+  word-break: break-word;
 }
 
 .profile-img {
-  width: 220px;
-  height: 220px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 24px;
+  border-radius: 20px;
   box-shadow: 0 8px 16px rgba(46, 56, 77, 0.08);
   border: 1px solid rgba(31, 41, 55, 0.06);
   flex-shrink: 0;
@@ -816,6 +824,221 @@ p {
   font-size: 0.92rem;
 }
 
+/* ── Vertical Timeline ───────────────────────────── */
+
+.tl-wrapper {
+  position: relative;
+  margin-top: 1rem;
+  padding: 0.5rem 0 2rem;
+}
+
+/* The centre spine */
+.tl-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(26, 127, 115, 0.25) 6%,
+    rgba(26, 127, 115, 0.25) 94%,
+    transparent
+  );
+}
+
+/* Each row */
+.tl-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: 0 2rem;
+  margin-bottom: 3rem;
+}
+
+/* The node column (centre) */
+.tl-node {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 2;
+}
+
+/* Glowing dot */
+.tl-dot {
+  display: block;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px rgba(26, 127, 115, 0.15), 0 0 0 10px rgba(26, 127, 115, 0.06);
+  flex-shrink: 0;
+  margin-top: 1.4rem;
+}
+
+.tl-dot-blue {
+  background: #3b82f6;
+  box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.15), 0 0 0 10px rgba(59, 130, 246, 0.06);
+}
+
+.tl-dot-yellow {
+  background: #d97706;
+  box-shadow: 0 0 0 5px rgba(217, 119, 6, 0.15), 0 0 0 10px rgba(217, 119, 6, 0.06);
+}
+
+/* Date + place stamp below the dot */
+.tl-stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(31, 41, 55, 0.08);
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.07);
+  min-width: 9rem;
+}
+
+.tl-date {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.tl-place {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* Card placement */
+.tl-card {
+  padding: 1.6rem 1.8rem;
+  border-radius: var(--radius);
+}
+
+/* Right entries: card goes to col 3, node in col 2, col 1 is empty */
+.tl-right .tl-node  { grid-column: 2; grid-row: 1; }
+.tl-right .tl-card  { grid-column: 3; grid-row: 1; }
+
+/* Left entries: card goes to col 1, node in col 2, col 3 is empty */
+.tl-left .tl-node   { grid-column: 2; grid-row: 1; }
+.tl-left .tl-card   { grid-column: 1; grid-row: 1; }
+
+/* Connector horizontal line from node to card */
+.tl-right .tl-node::after,
+.tl-left .tl-node::after {
+  content: "";
+  position: absolute;
+  top: calc(1.4rem + 0.55rem); /* aligns with dot centre */
+  height: 2px;
+  width: 2rem;
+  background: rgba(26, 127, 115, 0.2);
+}
+
+.tl-right .tl-node::after {
+  left: calc(50% + 0.55rem);
+}
+
+.tl-left .tl-node::after {
+  right: calc(50% + 0.55rem);
+}
+
+/* ── End Vertical Timeline ───────────────────────── */
+
+/* Shared card-content styles */
+.exp-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(26, 127, 115, 0.12);
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.85rem;
+}
+
+.exp-chip-blue {
+  background: rgba(213, 233, 255, 0.8);
+  color: #2563a8;
+}
+
+.exp-chip-yellow {
+  background: rgba(255, 233, 168, 0.7);
+  color: #92640a;
+}
+
+.exp-role {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.02em;
+}
+
+.exp-company {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.exp-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.exp-points li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.exp-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.52rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+.exp-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.exp-skills span {
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(31, 41, 55, 0.09);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(28px) scale(0.985);
@@ -844,7 +1067,10 @@ button:focus-visible {
 }
 
 @media (max-width: 1080px) {
-  .hero-grid,
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
   .about-grid,
   .thinking-grid,
   .writing-grid,
@@ -853,15 +1079,17 @@ button:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hero-grid > :first-child,
   .section-heading,
-  .contact-panel > :last-child,
+  .contact-panel > :last-child {
+    grid-column: 1 / -1;
+  }
+
   .featured-work .case-study {
     grid-column: 1 / -1;
   }
 
   .journey-strip {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -929,8 +1157,37 @@ button:focus-visible {
   .writing-grid,
   .recruiter-grid,
   .contact-panel,
-  .metrics-grid {
+  .metrics-grid,
+  .journey-strip {
     grid-template-columns: 1fr;
+  }
+
+  /* Timeline collapses to single column */
+  .tl-wrapper::before { left: 1.2rem; transform: none; }
+  .tl-entry { grid-template-columns: auto 1fr; gap: 0 1rem; }
+  .tl-right .tl-node,
+  .tl-left .tl-node  { grid-column: 1; grid-row: 1; }
+  .tl-right .tl-card,
+  .tl-left .tl-card  { grid-column: 2; grid-row: 1; }
+  .tl-right .tl-node::after,
+  .tl-left .tl-node::after { display: none; }
+  .tl-stamp { min-width: auto; }
+
+  /* Stack profile image and name vertically on mobile */
+  .hero-profile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .hero-profile h1 {
+    font-size: clamp(2.4rem, 10vw, 3.2rem);
+  }
+
+  .profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 18px;
   }
 
   .zone-label {
@@ -957,11 +1214,11 @@ button:focus-visible {
   }
 
   h1 {
-    font-size: clamp(2.35rem, 12vw, 3.35rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
 
   h2 {
-    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
   }
 
   .hero-card,
@@ -976,6 +1233,8 @@ button:focus-visible {
 
   .site-footer {
     padding-bottom: 2.2rem;
+    flex-direction: column;
+    text-align: center;
   }
 }
 
