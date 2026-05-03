@@ -96,3 +96,108 @@ if (!motionReduced) {
     });
   });
 }
+
+// --- Carousel Logic ---
+function initCarousels() {
+  const carousels = document.querySelectorAll('.wide-card-carousel');
+  
+  carousels.forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const images = track.querySelectorAll('img');
+    const dotsContainer = carousel.querySelector('.carousel-nav');
+    
+    if (!track || images.length <= 1) {
+      // Hide nav if there are no slides to navigate
+      if (dotsContainer) dotsContainer.style.display = 'none';
+      return;
+    }
+    
+    dotsContainer.innerHTML = '';
+    images.forEach((_, idx) => {
+      const dot = document.createElement('button');
+      dot.className = `carousel-dot ${idx === 0 ? 'active' : ''}`;
+      dot.setAttribute('aria-label', `Slide ${idx + 1}`);
+      dot.addEventListener('click', () => goToSlide(idx));
+      dotsContainer.appendChild(dot);
+    });
+    
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    let currentIndex = 0;
+    let intervalId;
+    
+    function goToSlide(index) {
+      currentIndex = index;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex);
+      });
+      resetInterval();
+    }
+    
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % images.length;
+      goToSlide(currentIndex);
+    }
+    
+    function resetInterval() {
+      clearInterval(intervalId);
+      intervalId = setInterval(nextSlide, 3500);
+    }
+    
+    resetInterval();
+    
+    carousel.addEventListener('mouseenter', () => clearInterval(intervalId));
+    carousel.addEventListener('mouseleave', resetInterval);
+  });
+}
+
+initCarousels();
+
+// --- Certificate Modal Logic ---
+function initCertificateModal() {
+  const modal = document.getElementById('certificate-modal');
+  const modalImg = document.getElementById('lightbox-img');
+  const closeBtn = modal.querySelector('.lightbox-close');
+  const certButtons = document.querySelectorAll('.cert-icon-btn');
+
+  if (!modal || !modalImg) return;
+
+  function openModal(imageSrc) {
+    modalImg.src = imageSrc;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    // Optional: clear src after animation finishes to reset
+    setTimeout(() => { modalImg.src = ''; }, 300);
+  }
+
+  certButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const certSrc = btn.getAttribute('data-cert');
+      if (certSrc) {
+        openModal(certSrc);
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal || e.target === modal.querySelector('.lightbox-content')) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+}
+
+initCertificateModal();
