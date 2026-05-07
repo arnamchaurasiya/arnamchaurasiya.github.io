@@ -1619,30 +1619,30 @@ button:focus-visible {
   text-transform: uppercase;
 }
 
-/* WhatsApp Button */
-.whatsapp-float {
+/* Mail Button */
+.mail-float {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   width: 60px;
   height: 60px;
-  background-color: #25d366;
+  background-color: var(--accent);
   color: #FFF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 10px 20px rgba(26, 127, 115, 0.3);
   z-index: 100;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.whatsapp-float:hover {
+.mail-float:hover {
   transform: translateY(-4px);
-  box-shadow: 0 14px 28px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 14px 28px rgba(26, 127, 115, 0.4);
 }
 
-.whatsapp-float svg {
+.mail-float svg {
   width: 32px;
   height: 32px;
 }
@@ -1785,6 +1785,52 @@ button:focus-visible {
 
 .exp-role-skills strong {
   color: var(--ink);
+}
+
+.exp-role-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .exp-role-layout {
+    flex-direction: row;
+    gap: 2rem;
+  }
+  .exp-role-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .exp-role-carousel-wrap {
+    width: 38%;
+    max-width: 350px;
+    flex-shrink: 0;
+  }
+}
+
+.cert-thumbnail-btn {
+  padding: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(31, 41, 55, 0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 44px;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.cert-thumbnail-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cert-thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Media Thumbnail */
