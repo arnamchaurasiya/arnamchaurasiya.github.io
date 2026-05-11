@@ -1518,6 +1518,12 @@ button:focus-visible {
   box-shadow: var(--shadow-soft);
 }
 
+.project-logo {
+  max-width: 65%;
+  max-height: 65%;
+  object-fit: contain;
+}
+
 .bg-blue { background: #d5e9ff; }
 .bg-yellow { background: #ffe9a8; }
 .bg-mint { background: #c8f1d8; }
