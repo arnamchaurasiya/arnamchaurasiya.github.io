@@ -125,12 +125,20 @@ function initCarousels() {
     let currentIndex = 0;
     let intervalId;
     
+    function updateCarouselHeight() {
+      const currentImage = images[currentIndex];
+      if (currentImage && currentImage.offsetHeight > 0) {
+        carousel.style.height = `${currentImage.offsetHeight}px`;
+      }
+    }
+    
     function goToSlide(index) {
       currentIndex = index;
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
       dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === currentIndex);
       });
+      updateCarouselHeight();
       resetInterval();
     }
     
@@ -148,6 +156,18 @@ function initCarousels() {
     
     carousel.addEventListener('mouseenter', () => clearInterval(intervalId));
     carousel.addEventListener('mouseleave', resetInterval);
+
+    images.forEach(img => {
+      if (img.complete) {
+        updateCarouselHeight();
+      } else {
+        img.addEventListener('load', updateCarouselHeight);
+      }
+    });
+
+    window.addEventListener('resize', updateCarouselHeight);
+    
+    updateCarouselHeight();
   });
 }
 
