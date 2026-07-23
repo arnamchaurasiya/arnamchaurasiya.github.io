@@ -205,6 +205,17 @@ function initCertificateModal() {
     });
   });
 
+  const carouselImages = document.querySelectorAll('.wide-card-carousel img');
+  carouselImages.forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (img.src) {
+        openModal(img.src);
+      }
+    });
+  });
+
   closeBtn.addEventListener('click', closeModal);
 
   modal.addEventListener('click', (e) => {

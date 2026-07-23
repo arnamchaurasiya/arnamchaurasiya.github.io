@@ -11,12 +11,11 @@ Sep 2022 - Present
 
 EXPERIENCE
 Goyalinfocom, Bikaner, India
-Product Analyst Intern
+Product Intern
 Jun 2025 - Aug 2025
-- Analyzed product usage data across web and mobile modules using Excel and SQL to identify customer pain points.
-- Translated business and client requirements into structured user stories and feature scopes.
-- Participated in sprint planning and cross-functional discussions, aligning delivery priorities with stakeholder expectations.
-- Prepared feature documentation to improve clarity across product, engineering, and operations teams.
+- Prepared feature documentation to ensure clarity across product, engineering, and operations teams.
+- Assisted in converting client and business requirements into simple feature ideas and task descriptions for the development team.
+- Helped research user needs and brainstorm feature ideas to improve overall product usability and engagement.
 
 LEADERSHIP EXPERIENCE
 GENE Society, TIET Patiala, India

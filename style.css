@@ -1718,12 +1718,13 @@ button:focus-visible {
   gap: 2.5rem;
 }
 
-.exp-timeline::before {
+.exp-role-item:not(:last-child)::before {
   content: '';
   position: absolute;
-  top: 0.5rem;
-  bottom: 0;
-  left: 1rem;
+  top: 0.4rem;
+  bottom: calc(-2.5rem - 0.4rem);
+  left: calc(-1.5rem + 1px);
+  transform: translateX(-50%);
   width: 2px;
   background: rgba(26, 127, 115, 0.2);
 }
@@ -1895,7 +1896,6 @@ button:focus-visible {
 @media (max-width: 600px) {
   .exp-group { padding: 1.5rem; }
   .exp-timeline { padding-left: 2rem; }
-  .exp-timeline::before { left: 0.5rem; }
   .exp-role-node { left: calc(-1.5rem + 1px); }
 }
 
