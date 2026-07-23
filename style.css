@@ -1721,8 +1721,8 @@ button:focus-visible {
 .exp-role-item:not(:last-child)::before {
   content: '';
   position: absolute;
-  top: 0.4rem;
-  bottom: calc(-2.5rem - 0.4rem);
+  top: 15px;
+  bottom: calc(-2.5rem - 15px);
   left: calc(-1.5rem + 1px);
   transform: translateX(-50%);
   width: 2px;
@@ -1737,7 +1737,7 @@ button:focus-visible {
   position: absolute;
   left: calc(-1.5rem + 1px);
   transform: translateX(-50%);
-  top: 0.4rem;
+  top: 15px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
