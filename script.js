@@ -205,6 +205,17 @@ function initCertificateModal() {
     });
   });
 
+  const achievementImages = document.querySelectorAll('.achievement-img');
+  achievementImages.forEach(img => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (img.src) {
+        openModal(img.src);
+      }
+    });
+  });
+
   const carouselImages = document.querySelectorAll('.wide-card-carousel img');
   carouselImages.forEach(img => {
     img.style.cursor = 'pointer';
@@ -232,3 +243,5 @@ function initCertificateModal() {
 }
 
 initCertificateModal();
+
+
