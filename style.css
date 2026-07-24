@@ -2001,7 +2001,7 @@ button:focus-visible {
   box-shadow: var(--shadow);
 }
 
-/* Image container with aspect-ratio */
+/* Image container with aspect-ratio & carousel support */
 .achievement-img-wrap {
   position: relative;
   width: 100%;
@@ -2012,15 +2012,55 @@ button:focus-visible {
   cursor: pointer;
 }
 
-.achievement-img {
+.achievement-img-wrap .carousel-track {
+  display: flex;
   width: 100%;
   height: 100%;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.achievement-img-wrap .achievement-img {
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
   object-fit: cover;
+  flex-shrink: 0;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .achievement-card:hover .achievement-img {
   transform: scale(1.08);
+}
+
+.achievement-img-wrap .carousel-nav {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.35rem;
+  z-index: 5;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.carousel-dot.active {
+  background: #ffffff;
+  transform: scale(1.35);
 }
 
 /* Hovering badge on top corner */

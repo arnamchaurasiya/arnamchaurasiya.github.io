@@ -126,6 +126,7 @@ function initCarousels() {
     let intervalId;
     
     function updateCarouselHeight() {
+      if (carousel.classList.contains('achievement-img-wrap')) return;
       const currentImage = images[currentIndex];
       if (currentImage && currentImage.offsetHeight > 0) {
         carousel.style.height = `${currentImage.offsetHeight}px`;
