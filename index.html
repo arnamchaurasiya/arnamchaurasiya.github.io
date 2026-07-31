@@ -536,9 +536,6 @@
               <img src="achievements/sih/3.jpg" alt="Smart India Hackathon 2024 Winner 3" class="achievement-img" />
               <img src="achievements/sih/4.jpg" alt="Smart India Hackathon 2024 Winner 4" class="achievement-img sih-img-4" />
             </div>
-            <div class="carousel-nav">
-              <button class="carousel-dot active" aria-label="Slide 1"></button>
-            </div>
             <div class="achievement-hover-badge badge-gold">
               <span class="badge-icon">🏆</span>
               <span class="badge-text">SIH '24 Winner</span>
@@ -558,10 +555,7 @@
         <article class="achievement-card paper-card">
           <div class="achievement-img-wrap wide-card-carousel">
             <div class="carousel-track">
-              <img src="achievements/mystiqode.png" alt="1st Place MYSTIQODE CTF" class="achievement-img" />
-            </div>
-            <div class="carousel-nav">
-              <button class="carousel-dot active" aria-label="Slide 1"></button>
+              <img src="achievements/mystiqode/1.png" alt="1st Place MYSTIQODE CTF" class="achievement-img" />
             </div>
             <div class="achievement-hover-badge badge-blue">
               <span class="badge-icon">🥇</span>
@@ -587,9 +581,6 @@
               <img src="achievements/reckon/3.JPG" alt="RECKON CTF 3" class="achievement-img" />
               <img src="achievements/reckon/5.JPG" alt="RECKON CTF 4" class="achievement-img" />
             </div>
-            <div class="carousel-nav">
-              <button class="carousel-dot active" aria-label="Slide 1"></button>
-            </div>
             <div class="achievement-hover-badge badge-mint">
               <span class="badge-icon">🥈</span>
               <span class="badge-text">2nd Place</span>
@@ -611,9 +602,6 @@
             <div class="carousel-track">
               <img src="achievements/blackbox/1.jpg" alt="Blackbox AI Bug Discovery 1" class="achievement-img" />
               <img src="achievements/blackbox/2.jpg" alt="Blackbox AI Bug Discovery 2" class="achievement-img" />
-            </div>
-            <div class="carousel-nav">
-              <button class="carousel-dot active" aria-label="Slide 1"></button>
             </div>
             <div class="achievement-hover-badge badge-peach">
               <span class="badge-icon">🐛</span>
@@ -760,11 +748,22 @@
     </svg>
   </a>
 
-  <!-- Certificate Modal -->
+  <!-- Certificate / Image Lightbox Modal -->
   <div class="lightbox-modal" id="certificate-modal">
     <div class="lightbox-content">
-      <button class="lightbox-close" aria-label="Close Certificate">&times;</button>
-      <img id="lightbox-img" src="" alt="Certificate View">
+      <button class="lightbox-close" aria-label="Close Preview">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous Image" title="Previous Image">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <img id="lightbox-img" src="" alt="Preview View">
+      <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next Image" title="Next Image">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+      <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
   </div>
 

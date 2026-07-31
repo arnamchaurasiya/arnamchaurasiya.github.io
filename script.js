@@ -112,14 +112,16 @@ function initCarousels() {
       return;
     }
     
-    dotsContainer.innerHTML = '';
-    images.forEach((_, idx) => {
-      const dot = document.createElement('button');
-      dot.className = `carousel-dot ${idx === 0 ? 'active' : ''}`;
-      dot.setAttribute('aria-label', `Slide ${idx + 1}`);
-      dot.addEventListener('click', () => goToSlide(idx));
-      dotsContainer.appendChild(dot);
-    });
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      images.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot ${idx === 0 ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Slide ${idx + 1}`);
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+      });
+    }
     
     const dots = carousel.querySelectorAll('.carousel-dot');
     let currentIndex = 0;
@@ -174,17 +176,49 @@ function initCarousels() {
 
 initCarousels();
 
-// --- Certificate Modal Logic ---
+// --- Certificate & Image Modal Logic ---
 function initCertificateModal() {
   const modal = document.getElementById('certificate-modal');
   const modalImg = document.getElementById('lightbox-img');
-  const closeBtn = modal.querySelector('.lightbox-close');
+  const closeBtn = modal ? modal.querySelector('.lightbox-close') : null;
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+  const counterEl = document.getElementById('lightbox-counter');
   const certButtons = document.querySelectorAll('.cert-icon-btn');
 
   if (!modal || !modalImg) return;
 
-  function openModal(imageSrc) {
-    modalImg.src = imageSrc;
+  let currentImages = [];
+  let currentIndex = 0;
+
+  function updateModalView() {
+    if (currentImages.length === 0) return;
+    modalImg.src = currentImages[currentIndex];
+
+    if (currentImages.length > 1) {
+      if (prevBtn) prevBtn.style.display = 'flex';
+      if (nextBtn) nextBtn.style.display = 'flex';
+      if (counterEl) {
+        counterEl.style.display = 'block';
+        counterEl.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+      }
+    } else {
+      if (prevBtn) prevBtn.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+      if (counterEl) counterEl.style.display = 'none';
+    }
+  }
+
+  function openModal(images, startIndex = 0) {
+    if (Array.isArray(images)) {
+      currentImages = images;
+    } else if (typeof images === 'string') {
+      currentImages = [images];
+    } else {
+      currentImages = [];
+    }
+    currentIndex = startIndex;
+    updateModalView();
     modal.classList.add('active');
     document.body.style.overflow = 'hidden'; // Prevent scrolling
   }
@@ -192,8 +226,37 @@ function initCertificateModal() {
   function closeModal() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
-    // Optional: clear src after animation finishes to reset
-    setTimeout(() => { modalImg.src = ''; }, 300);
+    setTimeout(() => {
+      modalImg.src = '';
+      currentImages = [];
+      currentIndex = 0;
+    }, 300);
+  }
+
+  function showNextImage() {
+    if (currentImages.length <= 1) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateModalView();
+  }
+
+  function showPrevImage() {
+    if (currentImages.length <= 1) return;
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateModalView();
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showPrevImage();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showNextImage();
+    });
   }
 
   certButtons.forEach(btn => {
@@ -201,34 +264,34 @@ function initCertificateModal() {
       e.stopPropagation();
       const certSrc = btn.getAttribute('data-cert');
       if (certSrc) {
-        openModal(certSrc);
+        openModal([certSrc], 0);
       }
     });
   });
 
-  const achievementImages = document.querySelectorAll('.achievement-img');
-  achievementImages.forEach(img => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (img.src) {
-        openModal(img.src);
-      }
+  function setupImageClickListeners(selector) {
+    const images = document.querySelectorAll(selector);
+    images.forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const carouselContainer = img.closest('.wide-card-carousel, .achievement-img-wrap, .role-carousel');
+        if (carouselContainer) {
+          const siblingImgs = Array.from(carouselContainer.querySelectorAll('img')).filter(i => i.src);
+          const idx = siblingImgs.indexOf(img);
+          const imageSources = siblingImgs.map(i => i.src);
+          openModal(imageSources, idx >= 0 ? idx : 0);
+        } else if (img.src) {
+          openModal([img.src], 0);
+        }
+      });
     });
-  });
+  }
 
-  const carouselImages = document.querySelectorAll('.wide-card-carousel img');
-  carouselImages.forEach(img => {
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (img.src) {
-        openModal(img.src);
-      }
-    });
-  });
+  setupImageClickListeners('.achievement-img');
+  setupImageClickListeners('.wide-card-carousel img');
 
-  closeBtn.addEventListener('click', closeModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal || e.target === modal.querySelector('.lightbox-content')) {
@@ -237,8 +300,13 @@ function initCertificateModal() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') {
       closeModal();
+    } else if (e.key === 'ArrowRight') {
+      showNextImage();
+    } else if (e.key === 'ArrowLeft') {
+      showPrevImage();
     }
   });
 }
