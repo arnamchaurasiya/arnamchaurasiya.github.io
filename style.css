@@ -1544,6 +1544,7 @@ button:focus-visible {
 .bg-blue { background: #d5e9ff; }
 .bg-yellow { background: #ffe9a8; }
 .bg-mint { background: #c8f1d8; }
+.bg-purple { background: #e8d5ff; }
 
 .wide-card-content {
   flex-grow: 1;
