@@ -313,4 +313,29 @@ function initCertificateModal() {
 
 initCertificateModal();
 
+// --- Hide floating mail button when contact section is in view ---
+function initMailFloatObserver() {
+  const contactSection = document.getElementById("contact");
+  const mailFloat = document.querySelector(".mail-float");
 
+  if (!contactSection || !mailFloat || !("IntersectionObserver" in window)) return;
+
+  const mailFloatObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          mailFloat.classList.add("mail-float-hidden");
+        } else {
+          mailFloat.classList.remove("mail-float-hidden");
+        }
+      });
+    },
+    {
+      threshold: 0.08,
+    }
+  );
+
+  mailFloatObserver.observe(contactSection);
+}
+
+initMailFloatObserver();
